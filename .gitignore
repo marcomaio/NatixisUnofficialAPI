@@ -1,0 +1,7 @@
+# User settings #
+#################
+*.json
+
+# Compiled source #
+###################
+*.pyc
