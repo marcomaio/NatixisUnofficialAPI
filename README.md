@@ -8,13 +8,21 @@ Three containers retrieved:
 - map \<key: investment_name, map \<key: purchase_date, value: purchase_value, parts_number_bought\> \>
 - map \<key: availability_date, map \<key: investment_name, value: number_of_available_parts\> \>
 
+A Natixis data handler has been developed, built upon the three containers above, aiming to ease the reading of data. It provides following methods:
+    def get_amount_by_stock_name(self, stock_name):
+    def get_amount_total_investment(self):
+    def get_total_amount_by_date(self, date=None, stock_name="", closest_availability_only=False):
+    def get_paid_by_stock_name(self, stock_name=None):
+    def get_total_gain(self):
+    def get_gain_by_stock_name(self, stock_name):
+    def get_next_available_amount(self):
+
+
 It currently does not support:
 - cases in which you already withdrew some parts.
 - error cases
 
 Please try to play with the main.py file, just insert your credentials in the pre-set variables, save it and launch it:
 python main.py
-
-!! Do not forget to remove your credentials from the main.py file  and re-save it!!
 
 Any feedback on the data retrieved consinstency + contribution are more than welcome
