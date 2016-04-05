@@ -9,13 +9,13 @@ Three containers retrieved:
 - map \<key: availability_date, map \<key: investment_name, value: number_of_available_parts\> \>
 
 A Natixis data handler has been developed, built upon the three containers above, aiming to ease the reading of data. It provides following methods:
-    def get_amount_by_stock_name(self, stock_name):
-    def get_amount_total_investment(self):
-    def get_total_amount_by_date(self, date=None, stock_name="", closest_availability_only=False):
-    def get_paid_by_stock_name(self, stock_name=None):
-    def get_total_gain(self):
-    def get_gain_by_stock_name(self, stock_name):
-    def get_next_available_amount(self):
+- get_amount_by_stock_name(self, stock_name)
+- get_amount_total_investment(self)
+- get_total_amount_by_date(self, date=None, stock_name="", closest_availability_only=False)
+- get_paid_by_stock_name(self, stock_name=None)
+- get_total_gain(self)
+- get_gain_by_stock_name(self, stock_name)
+- get_next_available_amount(self)
 
 
 It currently does not support:
