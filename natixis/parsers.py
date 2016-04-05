@@ -193,18 +193,16 @@ class HistoricalOperationDetails(HTMLParser):
         if self.__investment_found and self.__investment_attributes <=3:
             if self.__investment_attributes == 1:
                 self.__investment_name = data.strip()
-                if not self.actions_by_name.has_key(self.__investment_name):
+                if self.__investment_name not in self.actions_by_name:
                     self.actions_by_name[self.__investment_name] = {}
             elif self.__investment_attributes == 2:
                 self.__date_of_purchase = data.strip()
-                if not self.actions_by_name[self.__investment_name].has_key(self.__date_of_purchase):
+                if self.__date_of_purchase not in self.actions_by_name[self.__investment_name]:
                     self.actions_by_name[self.__investment_name][self.__date_of_purchase] = {}
             elif self.__investment_attributes == 3:
                 purchase_value = float(FLOAT_REGEX.sub("", data.strip()).replace(',', '.'))
-                if self.actions_by_name[self.__investment_name][self.__date_of_purchase].has_key("Purchase value"):
-                    self.actions_by_name[self.__investment_name][self.__date_of_purchase]["Purchase value"] += purchase_value
-                else:
-                    self.actions_by_name[self.__investment_name][self.__date_of_purchase]["Purchase value"] = purchase_value
+                self.actions_by_name[self.__investment_name][self.__date_of_purchase]["Purchase value"] = \
+                    self.actions_by_name[self.__investment_name][self.__date_of_purchase].get("Purchase value", 0) + purchase_value
 
         if self.__possible_investment_parts_found:
             if 'CSG' in data:
@@ -212,18 +210,13 @@ class HistoricalOperationDetails(HTMLParser):
 
         if self.__possible_investment_parts_found and self.__span_counter == 3:
             self.__number_of_parts = float(FLOAT_REGEX.sub("", data.strip()).replace(',', '.'))
-            if self.actions_by_name[self.__investment_name][self.__date_of_purchase].has_key("Number of actions bought"):
-                self.actions_by_name[self.__investment_name][self.__date_of_purchase]["Number of actions bought"] += \
-                    self.__number_of_parts
-            else:
-                self.actions_by_name[self.__investment_name][self.__date_of_purchase]["Number of actions bought"] = \
-                    self.__number_of_parts
+            self.actions_by_name[self.__investment_name][self.__date_of_purchase]["Number of actions bought"] = \
+                self.actions_by_name[self.__investment_name][self.__date_of_purchase].get("Number of actions bought", 0) + self.__number_of_parts
 
         if self.__availability_date_found:
             self.__date_of_availability = data.strip()
-            if not self.actions_by_availability.has_key(self.__date_of_availability):
+            if self.__date_of_availability not in self.actions_by_availability:
                 self.actions_by_availability[self.__date_of_availability] = {}
-            if not self.actions_by_availability[self.__date_of_availability].has_key(self.__investment_name):
-                self.actions_by_availability[self.__date_of_availability][self.__investment_name] = self.__number_of_parts
-            else:
-                self.actions_by_availability[self.__date_of_availability][self.__investment_name] += self.__number_of_parts
+            self.actions_by_availability[self.__date_of_availability][self.__investment_name] = \
+                self.actions_by_availability[self.__date_of_availability].get(self.__investment_name, 0) + self.__number_of_parts
+

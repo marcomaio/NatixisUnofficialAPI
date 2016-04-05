@@ -52,16 +52,10 @@ class DataRetriever():
 
         return headers
 
-    def retrieve_data(self, investments_today=None, \
-                      investments_details_by_name = None, \
-                      investments_details_by_availability = None):
-        # input data assessment
-        if investments_today == None:
-            raise ValueError('Output INVESTMENTS_TODAY object not specified!')
-        elif investments_details_by_name == None:
-            raise ValueError('Output INVESTMENTS_DETAILS_BY_NAME object not specified!')
-        elif investments_details_by_availability == None:
-            raise ValueError('Output INVESTMENTS_DETAILS_BY_AVAILABILITY object not specified!')
+    def retrieve_data(self):
+        investments_today = {}
+        investments_details_by_name = {}
+        investments_details_by_availability = {}
 
         # Open the connection
         connection = httplib.HTTPSConnection(HOME_PAGE)
@@ -107,3 +101,7 @@ class DataRetriever():
 
         # Close the connection
         connection.close()
+
+        # return containers
+        return investments_today, investments_details_by_name, investments_details_by_availability
+
