@@ -1,10 +1,11 @@
+import getpass
 import natixis.connections
 from natixis.handler import Handler
 
 ## YOUR CREDENTIALS HERE ##
 NUMERO_ENTERPRISE = raw_input("Insert your \"NUMERO D\'ENTERPRISE\": ")
 CODE_SERVEUR = raw_input("Insert your \"CODE SERVEUR\": ")
-PASSWORD = raw_input("Insert your \"PASSWORD\": ")
+PASSWORD = getpass.getpass("Insert your \"PASSWORD\": ")
 
 # Get your natixis data!
 data_retriever = natixis.connections.DataRetriever(NUMERO_ENTERPRISE, CODE_SERVEUR, PASSWORD)
